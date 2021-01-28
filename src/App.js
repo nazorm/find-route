@@ -3,7 +3,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Container, Alert, Button, Form } from "react-bootstrap";
-import Direction from './components/direction'
+import Direction from './components/Direction'
 
 function App() {
   const [location, setLocation] = useState("");
