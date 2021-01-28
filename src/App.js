@@ -1,12 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { Container, Alert, Button, Form } from "react-bootstrap";
 
 function App() {
   const [location, setLocation] = useState("");
   const [destination, setDestination] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleLocationChange = (e) => {
     const { value } = e.target;
@@ -24,6 +25,22 @@ function App() {
       alert(`${location} to ${destination}`);
     }
   };
+
+  useEffect(()=>{
+const getDirections= async ()=>{
+  setLoading(true)
+  let key = `${process.env.REACT_APP_API_KEY}`
+  const res = await axios.get(`https://maps.googleapis.com/maps/api/directions/json?
+  origin=${location}&destination=${destination}
+  &key=${key}`)
+  console.log(res.data)
+}
+getDirections()
+  },[])
+
+
+
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
