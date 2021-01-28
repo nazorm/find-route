@@ -3,6 +3,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Container, Alert, Button, Form } from "react-bootstrap";
+import Direction from './components/direction'
 
 function App() {
   const [location, setLocation] = useState("");
@@ -22,21 +23,29 @@ function App() {
     if (!location || !destination) {
       alert("enter location or destination");
     } else {
-      alert(`${location} to ${destination}`);
+      const getDirections = async () =>{
+        setLoading(true)
+        const res = await axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${location}&destination=${destination}&key=${process.env.REACT_APP_API_KEY}`)
+        console.log(res.data)
+      }
+      getDirections()
+      setLocation("")
+      setDestination("")
+      setLoading(false)
     }
   };
 
-  useEffect(()=>{
-const getDirections= async ()=>{
-  setLoading(true)
-  let key = `${process.env.REACT_APP_API_KEY}`
-  const res = await axios.get(`https://maps.googleapis.com/maps/api/directions/json?
-  origin=${location}&destination=${destination}
-  &key=${key}`)
-  console.log(res.data)
-}
-getDirections()
-  },[])
+ 
+//   useEffect(()=>{
+// const getDirections= async ()=>{
+//   setLoading(true)
+//   let key = `${process.env.REACT_APP_API_KEY}`
+//   const res = await axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${location}&destination=${destination}
+//   &key=${key}`)
+//   console.log(res.data)
+// }
+// getDirections()
+//   },[])
 
 
 
@@ -72,8 +81,8 @@ getDirections()
           Enter
         </Button>
       </Form>
-
-      <div className="direction-container"></div>
+      {loading? <p>Loading...</p>: <Direction/>}
+      
     </Container>
   );
 }
