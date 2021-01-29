@@ -27,10 +27,9 @@ function App() {
         setLoading(true)
         const res = await axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${location}&destination=${destination}&key=${process.env.REACT_APP_API_KEY}`)
         console.log(res.data)
+        console.log(process.env)
       }
       getDirections()
-      setLocation("")
-      setDestination("")
       setLoading(false)
     }
   };
