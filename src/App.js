@@ -26,8 +26,7 @@ function App() {
       const getDirections = async () =>{
         setLoading(true)
         const res = await axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${location}&destination=${destination}&key=${process.env.REACT_APP_API_KEY}`)
-        console.log(res.data)
-        console.log(process.env)
+        console.log(res.data.routes)
       }
       getDirections()
       setLoading(false)
@@ -57,7 +56,7 @@ function App() {
           <Form.Control
             type="text"
             onChange={handleLocationChange}
-            placeholder="Enter Your Location"
+            placeholder="Enter Your Location; State,Country"
           />
           <Form.Text className="text-muted">
             We'll never share your location without your permission.
@@ -69,7 +68,7 @@ function App() {
           <Form.Control
             type="text"
             onChange={handleDestinationChange}
-            placeholder="Enter your Destination"
+            placeholder="Enter your Destination; State,Country"
           />
           <Form.Text className="text-muted">
             We'll never share your destination without your permission.
