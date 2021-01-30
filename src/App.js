@@ -33,20 +33,6 @@ function App() {
     }
   };
 
- 
-//   useEffect(()=>{
-// const getDirections= async ()=>{
-//   setLoading(true)
-//   let key = `${process.env.REACT_APP_API_KEY}`
-//   const res = await axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${location}&destination=${destination}
-//   &key=${key}`)
-//   console.log(res.data)
-// }
-// getDirections()
-//   },[])
-
-
-
 
   return (
     <Container>
